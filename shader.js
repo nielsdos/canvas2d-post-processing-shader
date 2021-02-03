@@ -13,6 +13,22 @@ export default class Shader {
     }
 
     /**
+     * Dispose.
+     */
+    dispose() {
+        return this._gl.deleteProgram(this.program);
+    }
+
+    /**
+     * Get uniform location.
+     * @param {string} name
+     * @return {WebGLUniformLocation}
+     */
+    getUniformLocation(name) {
+        return this._gl.getUniformLocation(this.program, name);
+    }
+
+    /**
      * Initializes the shader
      * @param {string} vs The vertex shader source code
      * @param {string} fs The fragment shader source code
@@ -55,3 +71,4 @@ export default class Shader {
         this._gl.useProgram(this.program);
     }
 }
+

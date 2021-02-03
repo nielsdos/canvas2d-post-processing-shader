@@ -24,6 +24,15 @@ export default class Effect {
     }
 
     /**
+     * Dispose
+     */
+    dispose() {
+        this._shader.dispose();
+        this._gl.deleteTexture(this._texture);
+        this._gl.deleteBuffer(this._quad);
+    }
+
+    /**
      * @returns {Shader}
      */
     get shader() {
@@ -76,6 +85,7 @@ export default class Effect {
 
     render() {
         this._shader.activate();
+        this._setAdditionalShaderData();
         this._gl.uniform2f(this._shader.canvasDimensions, this._canvas.width, this._canvas.height);
         this._gl.viewport(0, 0, this._canvas.width, this._canvas.height);
         this._gl.clearColor(0, 0, 0, 1);
@@ -87,3 +97,4 @@ export default class Effect {
         this._gl.drawArrays(this._gl.TRIANGLES, 0, 6);
     }
 }
+
